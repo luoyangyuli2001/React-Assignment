@@ -1,31 +1,52 @@
-import React from "react";
-import { getMovies } from "../api/tmdb-api";
+import React, { useEffect, useState } from "react";
 import PageTemplate from '../components/templateDiscoverPage';
-import { useQuery } from 'react-query';
-import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 
 const HomePage = () => {
+  const [moviesData, setMoviesData] = useState([])
+  const [page, setPage] = useState(1);
 
-  const { data, error, isLoading, isError }  = useQuery('discover', getMovies)
+  useEffect(() => {
+      fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
+      )
+      .then(response => response.json())
+      .then(json => {
+        setMoviesData(prev => [...prev, ...json.results]);
+      })
+    }, [page]);
 
-  if (isLoading) {
-    return <Spinner />
+  const handleScroll = () => {
+    if(window.innerHeight + document.documentElement.scrollTop + 1 >= document
+      .documentElement.scrollHeight) {
+        setPage(prev => prev + 1)
+      }
   }
 
-  if (isError) {
-    return <h1>{error.message}</h1>
-  }  
-  const movies = data.results;
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [])
+  // const { data, error, isLoading, isError }  = useQuery('discover', getMovies)
+
+  // if (isLoading) {
+  //   return <Spinner />
+  // }
+
+  // if (isError) {
+  //   return <h1>{error.message}</h1>
+  // }  
+  // const movies = data.results;
 
   // Redundant, but necessary to avoid app crashing.
-  const favorites = movies.filter(m => m.favorite)
+  const favorites = moviesData.filter(m => m.favorite)
   localStorage.setItem('favorites', JSON.stringify(favorites))
 
   return (
     <PageTemplate
       title="Discover Movies"
-      movies={movies}
+      movies={moviesData}
       action={(movie) => {
         return <AddToFavoritesIcon movie={movie} />
       }}
