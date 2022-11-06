@@ -23,10 +23,6 @@ const TopRatedMoviesPage = () => {
   }  
   const totalPages = data.total_pages;
   const movies = data.results;
-  console.log(data.total_results)
-  // Redundant, but necessary to avoid app crashing.
-  const favorites = movies.filter(m => m.favorite)
-  localStorage.setItem('favorites', JSON.stringify(favorites))
 
   return (
     <>
