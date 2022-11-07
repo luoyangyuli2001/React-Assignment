@@ -12,17 +12,21 @@ const HomePage = () => {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [sortFilter, setSortFilter] = useState("popularity.desc")
+  const [runtimeFilter, setRuntimeFilter] = useState([0,390])
+  const [userScoreFilter, setUserScoreFilter] = useState([0,10])
   const genreId = Number(genreFilter);
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else if (type === "genre") setGenreFilter(value);
     else if (type === "sort") setSortFilter(value);
+    else if (type === "runtime") setRuntimeFilter(value);
+    else if (type === "score") setUserScoreFilter(value);
   };
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=${sortFilter}&include_adult=false&include_video=false&page=${page}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=${sortFilter}&include_adult=false&with_runtime.gte=${runtimeFilter[0]}&with_runtime.lte=${runtimeFilter[1]}&vote_average.gte=${userScoreFilter[0]}&vote_average.lte=${userScoreFilter[1]}&include_video=false&page=${page}`
     )
     .then(response => response.json())
     .then(json => {
@@ -32,13 +36,13 @@ const HomePage = () => {
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=${sortFilter}&include_adult=false&include_video=false&page=1`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=${sortFilter}&include_adult=false&with_runtime.gte=${runtimeFilter[0]}&with_runtime.lte=${runtimeFilter[1]}&vote_average.gte=${userScoreFilter[0]}&vote_average.lte=${userScoreFilter[1]}&include_video=false&page=1`
     )
     .then(response => response.json())
     .then(json => {
       setMoviesData(json.results)
     })
-  }, [sortFilter])
+  }, [sortFilter, runtimeFilter,userScoreFilter])
 
   const handleScroll = () => {
     if(window.innerHeight + document.documentElement.scrollTop + 1 >= document
@@ -74,6 +78,8 @@ const HomePage = () => {
             titleFilter={nameFilter}
             genreFilter={genreFilter}
             sortFilter={sortFilter}
+            runtimeFilter={runtimeFilter}
+            userScoreFilter={userScoreFilter}
           />
         </Grid>
         <Grid item xs={10} sx={{ display: "flex", flexWrap: "wrap",}}>

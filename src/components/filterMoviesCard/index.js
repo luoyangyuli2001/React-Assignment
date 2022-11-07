@@ -11,6 +11,12 @@ import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg'
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
+import { Slider } from "@mui/material";
+import Box from "@mui/material/Box"
+
+function valuetext(value) {
+  return `${value} min`;
+}
 
 const formControl = 
   {
@@ -69,6 +75,15 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "sort", e.target.value);
   };
 
+  const handleRuntimeChange = (e) => {
+    handleChange(e, "runtime", e.target.value);
+  };
+
+  const handleUserScoreChange = (e) => {
+    handleChange(e, "score", e.target.value);
+  };
+
+
   return (
     <Card 
       sx={{
@@ -126,6 +141,39 @@ export default function FilterMoviesCard(props) {
             })}
           </TextField>
         </FormControl>
+        <Typography variant="h6" >
+            Filter
+        </Typography>
+        <Box sx={{marginLeft:"20px" ,width: "80%"}}>
+          <Typography variant="body1" >
+            Runtime
+          </Typography>
+          <Slider
+            value={props.runtimeFilter} 
+            onChange={handleRuntimeChange}
+            valueLabelDisplay="auto"
+            getAriaValueText={valuetext}
+            step={15}
+            marks
+            min={0}
+            max={390}
+          />
+        </Box>
+        <Box sx={{marginLeft:"20px" ,width: "80%"}}>
+          <Typography variant="body1" >
+            Score
+          </Typography>
+          <Slider
+            value={props.userScoreFilter} 
+            onChange={handleUserScoreChange}
+            valueLabelDisplay="auto"
+            getAriaValueText={valuetext}
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+        </Box>
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}
