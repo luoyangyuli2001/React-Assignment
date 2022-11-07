@@ -35,6 +35,23 @@ export default function FilterMoviesCard(props) {
     genres.unshift({ id: "0", name: "All" });
   }
 
+  const sortOptions = [
+    { id: 0, name: "popularity.desc"},
+    { id: 1, name: "popularity.asc"},
+    { id: 2, name: "release_date.desc"},
+    { id: 3, name: "release_date.asc"},
+    { id: 4, name: "revenue.desc"},
+    { id: 5, name: "revenue.asc"},
+    { id: 6, name: "primary_release_date.desc"},
+    { id: 7, name: "primary_release_date.asc"},
+    { id: 8, name: "original_title.desc"},
+    { id: 9, name: "original_title.asc"},
+    { id: 10, name: "vote_average.desc"},
+    { id: 11, name: "vote_average.asc"},
+    { id: 12, name: "vote_count.desc"},
+    { id: 13, name: "vote_count.asc"},
+  ]
+
   const handleChange = (e, type, value) => {
     e.preventDefault();
     props.onUserInput(type, value); // NEW
@@ -46,6 +63,10 @@ export default function FilterMoviesCard(props) {
 
   const handleGenreChange = (e) => {
     handleChange(e, "genre", e.target.value);
+  };
+
+  const handleSortChange = (e) => {
+    handleChange(e, "sort", e.target.value);
   };
 
   return (
@@ -82,6 +103,24 @@ export default function FilterMoviesCard(props) {
               return (
                 <MenuItem key={genre.id} value={genre.id}>
                   {genre.name}
+                </MenuItem>
+              );
+            })}
+          </TextField>
+        </FormControl>
+        <FormControl sx={{...formControl}}>
+          <TextField
+            select
+            label="Sort"
+            id="sort-select"
+            value={props.sortFilter}
+            onChange={handleSortChange}
+            variant="filled"
+          >
+            {sortOptions.map((sort) => {
+              return (
+                <MenuItem key={sort.id} value={sort.name}>
+                  {sort.name}
                 </MenuItem>
               );
             })}
