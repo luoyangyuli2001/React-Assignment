@@ -41,14 +41,44 @@ New
 + Get the movies and TV info of a person - /person/:id/combined_credits
 
 ## Routing.
-
+Old
 + / - displays discover movies page.
-+ /blogs/:id - displays a particular blog.
-+ /blogs/:id/comments - detail view of a particular blog and its comments.
-+ etc.
++ /movies/favourite - displays user's favourite movies.
++ /movies/upcoming - displays upcoming movies.
++ /movies/:id - displays a particular movie's detail.
++ /reviews/form - User can write reviews for their favorite movies.
++ /reviews/:id - displays reviews about a movie.
+
+New
++ /movies/top-rated - displays top rated movies.
++ /person/popular - displays popular people
++ /person/:id - displays a particular person's detail.
 
 ## Independent learning (If relevant).
 
-Itemize the technologies/techniques you researched independently and adopted in your project, 
-i.e. aspects not covered in the lectures/labs. Include the source code filenames that illustrate these 
-(we do not require code excerpts) and provide references to the online resources that helped you (articles/blogs).
+### CircularProgress
++ Link: https://mui.com/material-ui/react-progress/#main-content
+
+Movie ratings on TMDB are expressed in the form of a progress bar, which looks interesting. So I included a copy of it in my project - "CircularProgressWithLabel".
+
+Actually, it consists of two "CircularProgess" and a label. One of the progress bars acts as the background, and the other one shows a specific percentage. And the background progress bar needs an opacity attribute.
+
+I also noticed that different rating on TMDB shows different colors. It's easy since we have done similar jobs in react-basic-labs.
+
+### InfiniteScroll
++ Concept of InfiniteScroll - Link: https://www.youtube.com/
++ InfiniteScroll - Link: https://www.youtube.com/watch?v=NZKUirTtxcg
+
+It's a good experience for user if they can keep discovering new things when they scroll to the bottom of the page, just like youtube. When the user scrolls to the bottom, a new list of videos will exist.
+
+### Pagination
++ Link: https://www.youtube.com/watch?v=8v6fYfhvO5E&t=926s
+
+Upcoming movies page and Top rated movies page have pagination.
+
+### Horizontal scroll
++ Link: https://stackoverflow.com/questions/69597992/how-to-implement-horizontal-scrolling-of-tiles-in-mui-gridlist
+
+In person details page, there is a list of movies that the person is acting in. From a UI design point of view, it is better to use horizontal scrolling here. Actually, it's not difficult, just add some css style.
+
+
