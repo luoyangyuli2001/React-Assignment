@@ -4,40 +4,48 @@ Name: Luo Yang
 
 ## Overview.
 
-[A brief statement on the content of this repository.]
+A react movie app. Web App Development CA-1.
 
 ### Features.
-[ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
 
-+ Feature 1
-+ Feature 2
-+ Feature 3
-+ etc
-+ etc
++ New moive page - Top rated moives
++ New people page - Popular people
++ New people details page - Person details
++ New site header (Drop-down Menu)
++ Sorting (14 sorting options) on discover page
++ New movie rating for movie card
++ User can click the link on person details page to reach the movie details page.
++ Pagination on Top rated movies page and Upcoming movies page.
++ New discover page - Infinite scroll
 
 ## Setup requirements.
 
-[ Outline any non-standard setup steps necessary to run your app locally after cloning the repo.]
++ npm install
++ npm start
 
 ## API endpoints.
 
-[ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
-
-e.g.
+Old
 + Discover list of movies - discover/movie
 + Movie details - movie/:id
-+ Movie genres = /genre/movie/list
++ Get the user reviews for a movie - /movie/:id/reviews
++ Get the images belong to a movie - /movie/:id/images
++ Movie genres - /genre/movie/list
++ Get a list of upcoming movies - /movie/upcoming
+
+New
++ Person details - /person/:id
++ Get the images belong to a person - /person/:id/images
++ Get the top rated movies on TMDB - /movie/top_rated
++ Get the list of popular people on TMDB - /person/popular
++ Get the movies and TV info of a person - /person/:id/combined_credits
 
 ## Routing.
 
-[ List the __new routes__ supported by your app and state the associated page.]
-
-+ /blogs - displays all published blogs.
++ / - displays discover movies page.
 + /blogs/:id - displays a particular blog.
 + /blogs/:id/comments - detail view of a particular blog and its comments.
 + etc.
-
-[If relevant, state what aspects of your app are protected (i.e. require authentication) and what is public.]
 
 ## Independent learning (If relevant).
 
