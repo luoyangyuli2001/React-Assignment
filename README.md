@@ -17,6 +17,7 @@ A react movie app. Web App Development CA-1.
 + User can click the link on person details page to reach the movie details page.
 + Pagination on Top rated movies page and Upcoming movies page.
 + New discover page - Infinite scroll
++ New filters - Runtime filter and Rating filter.
 
 ## Setup requirements.
 
@@ -80,5 +81,10 @@ Upcoming movies page and Top rated movies page have pagination.
 + Link: https://stackoverflow.com/questions/69597992/how-to-implement-horizontal-scrolling-of-tiles-in-mui-gridlist
 
 In person details page, there is a list of movies that the person is acting in. From a UI design point of view, it is better to use horizontal scrolling here. Actually, it's not difficult, just add some css style.
+
+### Slider
++ Link: https://mui.com/material-ui/react-slider/
+
+I combined range slider and discrete slider to make a new slider, just like the slider filter on TMDB.
 
 
