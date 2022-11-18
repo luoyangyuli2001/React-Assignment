@@ -6,6 +6,8 @@ Name: Luo Yang
 
 A react movie app. Web App Development CA-1.
 
+Demo: https://youtu.be/fIht3gYzDME
+
 ### Features.
 
 + New moive page - Top rated moives
