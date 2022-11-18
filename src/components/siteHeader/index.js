@@ -8,12 +8,16 @@ import Popover from "@mui/material/Popover";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
+import { logout, auth } from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = () => {
 
   const navigate = useNavigate();
+
+  const [user] = useAuthState(auth);
 
   const menuOptions1 = [
     { label: "Discover", path: "/" },
@@ -26,7 +30,15 @@ const SiteHeader = () => {
     { label: "Popular People", path: "/person/popular" },
   ];
 
+  const menuLoginOptions = [
+    { label: "Log out", path: "/logout" },
+    { label: "Login", path: "/login"}
+  ]
+
   const handleMenuSelect = (pageURL) => {
+    if (pageURL === "/logout") {
+      logout()
+    }
     navigate(pageURL, { replace: true });
   };
 
@@ -117,12 +129,33 @@ const SiteHeader = () => {
               ))}
             </Popover>
           </Box>
-          <Typography variant="h6" sx={{ flexGrow: "1" }}>
-            All you ever wanted to know about Movies!
-          </Typography>
-          <IconButton color="inherit">
-            Login
-          </IconButton>
+          {user==null?(
+            <>
+              <Typography variant="h6" sx={{ flexGrow: "1" }}>
+                All you ever wanted to know about Movies!
+              </Typography>
+                <IconButton
+                key={menuLoginOptions[1].label}
+                color="inherit"
+                onClick={() => handleMenuSelect(menuLoginOptions[1].path)}
+              >
+                {menuLoginOptions[1].label}
+              </IconButton>
+            </>
+          ) : (
+            <>
+              <Typography variant="h6" sx={{ flexGrow: "1" }}>
+                Welcome! {user.email}
+              </Typography>
+              <IconButton
+                key={menuLoginOptions[0].label}
+                color="inherit"
+                onClick={() => handleMenuSelect(menuLoginOptions[0].path)}
+              >
+                {menuLoginOptions[0].label}
+              </IconButton>
+            </>
+          )}
         </Toolbar>
       </AppBar>
       <Offset />

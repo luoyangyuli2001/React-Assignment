@@ -14,6 +14,10 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import PopularPeoplePage from './pages/popularPeoplePage';
 import PersonPage from './pages/personDetialsPage';
+import LoginPage from "./pages/loginPage";
+import RegisterPage from "./pages/registerPage";
+import ResetPage from "./pages/resetPage";
+import LogoutPage from "./pages/logoutPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +36,10 @@ const App = () => {
         <SiteHeader />
         <MoviesContextProvider>
         <Routes>
+          <Route path="/logout" element={ <LogoutPage />}/>
+          <Route path="/login" element={ <LoginPage />} />
+          <Route path="/register" element={ <RegisterPage />} />
+          <Route path="/reset" element={ <ResetPage />} />
           <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
           <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
           <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
