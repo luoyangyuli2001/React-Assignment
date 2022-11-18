@@ -18,6 +18,7 @@ A react movie app. Web App Development CA-1.
 + Pagination on Top rated movies page and Upcoming movies page.
 + New discover page - Infinite scroll
 + New filters - Runtime filter and Rating filter.
++ Firebase Authentication - Login, register, reset password.
 
 ## Setup requirements.
 
@@ -52,8 +53,12 @@ Old
 
 New
 + /movies/top-rated - displays top rated movies.
-+ /person/popular - displays popular people
++ /person/popular - displays popular people.
 + /person/:id - displays a particular person's detail.
++ /login - users can login here.
++ /logout - logout page and will redirect to discover page.
++ /register - users can register their accounts here.
++ /reset - users can reset their password here.
 
 ## Independent learning (If relevant).
 
@@ -87,4 +92,8 @@ In person details page, there is a list of movies that the person is acting in. 
 
 I combined range slider and discrete slider to make a new slider, just like the slider filter on TMDB.
 
+### firebase
++ Link: https://firebase.google.com/
+
+Firebase official website can view the complete tutorial
 
